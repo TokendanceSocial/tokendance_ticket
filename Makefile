@@ -7,7 +7,7 @@ compile: clean
 	npx hardhat compile
 
 test: compile
-	REPORT_GAS=true npx hardhat test
+	npx hardhat test
 
 deploy-ganache: test
 	npx hardhat run --network ganache scripts/deploy.js

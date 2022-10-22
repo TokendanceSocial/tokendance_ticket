@@ -12,14 +12,14 @@ const GANACHE_PRIVATE_KEY = "0x9e05d18b86fd1fcf60b614789d526be8ee4a0183ec19b80e7
 module.exports = {
   solidity: "0.8.17",
   networks: {
-    goerli: {
-      url: `https://eth-goerli.alchemyapi.io/v2/${ALCHEMY_API_KEY}`,
-      accounts: [GOERLI_PRIVATE_KEY]
-    },
-    // Make sure you have start ganache before deploy.
     ganache: {
       url: `http://127.0.0.1:8545/`,
       accounts: [GANACHE_PRIVATE_KEY]
-    }
+    },
+    // goerli: {
+    //   url: `https://eth-goerli.alchemyapi.io/v2/${ALCHEMY_API_KEY}`,
+    //   accounts: [GOERLI_PRIVATE_KEY]
+    // },
+    // Make sure you have start ganache before deploy.
   }
 };
