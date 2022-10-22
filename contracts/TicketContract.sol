@@ -55,11 +55,11 @@ contract TicketContract is ERC721URIStorage {
             _calledpeople[address1][address2] != true,
             "2g address already invited by the 1st generation people"
         );
-        _calledpeople[address1][address2] = true;
         require(
             _invitepeople[address1].length < 3,
             "1g address already invited two people"
         );
+        _calledpeople[address1][address2] = true;
         _safeMint(address2, tokenCounter);
         _setTokenURI(tokenCounter, tokenURI);
         _invitepeople[address1].push(address2);

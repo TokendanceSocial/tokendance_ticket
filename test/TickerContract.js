@@ -43,13 +43,34 @@ describe("Ticket Contract Test", () => {
       expect(o).equal(owner.address);
     });
   });
-  // describe("一代mint", async () => {
-  //   it("not owner cannot mint", async () => {
-  //     const { ticket, owner, address1, address2 } = await loadFixture(
-  //       deployTicketContract
-  //     );
-  //     console.log(address1);
-  //     await ticket.connect(address1).mint_1g(address1, "");
-  //   });
-  // });
+  describe("一代mint", async () => {
+    it("not owner cannot mint", async () => {
+      const { ticket, owner, address1, address2 } = await loadFixture(
+        deployTicketContract
+      );
+      await expect(
+        ticket.connect(address1).mint_1g(address1.address, "")
+      ).to.be.revertedWith("Not owner");
+    });
+    it("1g minted success", async () => {
+      const { ticket, owner, address1, address2 } = await loadFixture(
+        deployTicketContract
+      );
+      await expect(
+        await ticket.mint_1g(address1.address, "")
+      ).not.to.be.revertedWith("");
+      await expect(await ticket._1gpeople(address1.address)).to.equal(true);
+      await expect(await ticket.tokenCounter()).to.equal(1);
+    });
+    it("repect minted", async () => {
+      const { ticket, owner, address1, address2 } = await loadFixture(
+        deployTicketContract
+      );
+      await ticket.mint_1g(address1.address, "");
+      await expect(ticket.mint_1g(address1.address, "")).to.be.revertedWith(
+        "1g people already have tickets"
+      );
+    });
+  });
+  describe("二代mint", async () => {});
 });
